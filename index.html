@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>The Magic Penny</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         * {
             box-sizing: border-box;
@@ -12,197 +15,154 @@
         }
 
         body {
-            font-family: 'Segoe UI', Roboto, sans-serif;
+            font-family: 'DM Sans', system-ui, sans-serif;
             min-height: 100vh;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            color: white;
-            padding: 20px;
-            padding-bottom: 100px;
-        }
-
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
-            text-align: center;
+            background: #fffdf8;
+            color: #1a1a1a;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px 60px;
         }
 
         h1 {
-            font-size: 2.5rem;
-            margin-bottom: 5px;
-            background: linear-gradient(135deg, #ffd700 0%, #ffaa00 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #1a1a1a;
         }
 
-        .subtitle {
+        .tagline {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+
+        .day {
+            font-size: 1.1rem;
             color: #888;
-            margin-bottom: 20px;
-            font-size: 0.9rem;
+            margin-bottom: 4px;
         }
 
-        .day-display {
-            font-size: 1.2rem;
-            color: #00d4ff;
-            margin-bottom: 10px;
+        .day strong {
+            color: #1a1a1a;
+            font-size: 1.3rem;
         }
 
-        .day-number {
-            font-size: 2rem;
-            font-weight: bold;
+        .money {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #16a34a;
+            margin: 8px 0 20px;
+            transition: transform 0.15s ease;
         }
 
-        .amount-display {
-            font-size: 2.5rem;
-            font-weight: bold;
-            color: #2ecc71;
-            margin: 15px 0;
-            text-shadow: 0 0 20px rgba(46, 204, 113, 0.4);
-            transition: transform 0.3s ease, color 0.3s ease;
+        .money.pop {
+            transform: scale(1.08);
         }
 
-        .amount-display.pulse {
-            animation: pulse 0.5s ease;
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06), 0 0 0 1px rgba(0,0,0,0.04);
+            max-width: 340px;
+            width: 100%;
+            margin-bottom: 24px;
         }
 
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
-        }
-
-        .image-container {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 20px;
-            padding: 20px;
-            margin: 20px 0;
-            min-height: 220px;
+        .image-wrap {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 16px;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
-        #purchase-image {
-            max-width: 200px;
-            max-height: 200px;
-            border-radius: 10px;
-            transition: transform 0.3s ease, opacity 0.3s ease;
+        .image-wrap img {
+            max-width: 100%;
+            max-height: 100%;
+            border-radius: 8px;
         }
 
-        #purchase-image.changing {
-            opacity: 0;
-            transform: scale(0.8);
-        }
-
-        .purchase-text {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 15px 20px;
-            border-radius: 15px;
-            margin: 15px 0;
+        .description {
             font-size: 1rem;
             line-height: 1.5;
-            min-height: 80px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            color: #444;
+            min-height: 72px;
         }
 
-        .button-group {
+        .buttons {
             display: flex;
-            gap: 10px;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin: 20px 0;
+            gap: 12px;
+            max-width: 340px;
+            width: 100%;
         }
 
         button {
-            font-size: 1rem;
-            font-weight: bold;
-            padding: 15px 30px;
-            border: none;
-            border-radius: 30px;
-            cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
+            flex: 1;
             font-family: inherit;
+            font-size: 1rem;
+            font-weight: 600;
+            padding: 14px 20px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.1s ease, box-shadow 0.1s ease;
         }
 
-        button:hover:not(:disabled) {
-            transform: translateY(-2px);
-        }
-
-        button:active:not(:disabled) {
-            transform: translateY(0);
-        }
-
-        button:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
+        button:active {
+            transform: scale(0.97);
         }
 
         .btn-double {
-            background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+            background: #16a34a;
             color: white;
-            box-shadow: 0 5px 20px rgba(46, 204, 113, 0.4);
-            flex: 1;
-            min-width: 180px;
         }
 
-        .btn-double:hover:not(:disabled) {
-            box-shadow: 0 8px 30px rgba(46, 204, 113, 0.6);
+        .btn-double:hover {
+            background: #15803d;
         }
 
         .btn-back {
-            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
-            color: white;
-            box-shadow: 0 5px 20px rgba(231, 76, 60, 0.3);
+            background: #f1f1f1;
+            color: #666;
+            flex: 0 0 auto;
+            padding: 14px 18px;
         }
 
         .btn-back:hover:not(:disabled) {
-            box-shadow: 0 8px 30px rgba(231, 76, 60, 0.5);
+            background: #e5e5e5;
+            color: #333;
         }
 
-        .btn-reset {
-            background: rgba(255, 255, 255, 0.1);
-            color: #888;
-            font-size: 0.85rem;
-            padding: 10px 20px;
+        .btn-back:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
         }
 
-        .btn-reset:hover:not(:disabled) {
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-        }
-
-        .btn-share {
-            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
-            color: white;
-            box-shadow: 0 5px 20px rgba(52, 152, 219, 0.3);
-            font-size: 0.85rem;
-            padding: 10px 20px;
-        }
-
-        /* Day Slider */
-        .slider-container {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 20px;
-            border-radius: 15px;
-            margin: 20px 0;
+        .slider-section {
+            max-width: 340px;
+            width: 100%;
+            margin-top: 32px;
+            padding-top: 24px;
+            border-top: 1px solid #eee;
         }
 
         .slider-label {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 10px;
             font-size: 0.9rem;
             color: #888;
+            margin-bottom: 10px;
         }
 
         input[type="range"] {
             width: 100%;
-            height: 8px;
-            border-radius: 4px;
-            background: rgba(255, 255, 255, 0.2);
+            height: 6px;
+            border-radius: 3px;
+            background: #e5e5e5;
             outline: none;
             -webkit-appearance: none;
             appearance: none;
@@ -210,121 +170,63 @@
 
         input[type="range"]::-webkit-slider-thumb {
             -webkit-appearance: none;
-            appearance: none;
-            width: 24px;
-            height: 24px;
+            width: 20px;
+            height: 20px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #ffd700 0%, #ffaa00 100%);
+            background: #16a34a;
             cursor: pointer;
-            box-shadow: 0 2px 10px rgba(255, 215, 0, 0.5);
-            transition: transform 0.2s;
-        }
-
-        input[type="range"]::-webkit-slider-thumb:hover {
-            transform: scale(1.2);
+            box-shadow: 0 2px 6px rgba(22, 163, 74, 0.3);
         }
 
         input[type="range"]::-moz-range-thumb {
-            width: 24px;
-            height: 24px;
+            width: 20px;
+            height: 20px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #ffd700 0%, #ffaa00 100%);
+            background: #16a34a;
             cursor: pointer;
             border: none;
-            box-shadow: 0 2px 10px rgba(255, 215, 0, 0.5);
         }
 
-        /* Achievements */
-        .achievements {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 20px;
-            border-radius: 15px;
-            margin: 20px 0;
-        }
-
-        .achievements h3 {
-            color: #ffd700;
-            margin-bottom: 15px;
-            font-size: 1.1rem;
-        }
-
-        .achievement-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-            gap: 10px;
-        }
-
-        .achievement {
-            background: rgba(0, 0, 0, 0.3);
-            padding: 10px;
-            border-radius: 10px;
-            font-size: 0.75rem;
-            transition: all 0.3s ease;
-            opacity: 0.4;
-        }
-
-        .achievement.unlocked {
-            opacity: 1;
-            background: rgba(255, 215, 0, 0.2);
-            border: 1px solid rgba(255, 215, 0, 0.3);
-        }
-
-        .achievement-icon {
-            font-size: 1.5rem;
-            margin-bottom: 5px;
-        }
-
-        .achievement-name {
-            font-weight: bold;
-            color: #fff;
-        }
-
-        .achievement-desc {
-            color: #888;
-            font-size: 0.7rem;
-            margin-top: 3px;
-        }
-
-        /* Milestone notification */
-        .milestone-popup {
+        .milestone {
             position: fixed;
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%) scale(0);
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            border: 2px solid #ffd700;
-            padding: 30px 40px;
+            transform: translate(-50%, -50%) scale(0.9);
+            background: white;
+            padding: 32px 40px;
             border-radius: 20px;
-            z-index: 1000;
             text-align: center;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-            transition: transform 0.4s ease;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+            z-index: 100;
+            opacity: 0;
+            pointer-events: none;
+            transition: transform 0.25s ease, opacity 0.25s ease;
         }
 
-        .milestone-popup.show {
+        .milestone.show {
+            opacity: 1;
             transform: translate(-50%, -50%) scale(1);
+            pointer-events: auto;
         }
 
-        .milestone-popup h2 {
-            color: #ffd700;
-            margin-bottom: 10px;
+        .milestone h2 {
+            font-size: 1.6rem;
+            margin-bottom: 8px;
         }
 
-        .milestone-popup p {
-            color: #ccc;
+        .milestone p {
+            color: #666;
+            font-size: 1rem;
         }
 
         .overlay {
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.7);
-            z-index: 999;
+            inset: 0;
+            background: rgba(0,0,0,0.3);
+            z-index: 99;
             opacity: 0;
             pointer-events: none;
-            transition: opacity 0.3s ease;
+            transition: opacity 0.25s ease;
         }
 
         .overlay.show {
@@ -332,443 +234,255 @@
             pointer-events: auto;
         }
 
-        /* Progress bar */
-        .progress-section {
-            margin: 20px 0;
+        .reset-link {
+            margin-top: 24px;
+            font-size: 0.85rem;
+            color: #999;
+            text-decoration: underline;
+            cursor: pointer;
+            background: none;
+            border: none;
+            font-family: inherit;
         }
 
-        .progress-label {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.8rem;
-            color: #888;
-            margin-bottom: 5px;
+        .reset-link:hover {
+            color: #666;
         }
 
-        .progress-bar {
-            height: 8px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 4px;
+        /* Preload images container - hidden */
+        .preload {
+            position: absolute;
+            width: 1px;
+            height: 1px;
             overflow: hidden;
+            opacity: 0;
+            pointer-events: none;
         }
 
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #ffd700 0%, #ff6b6b 100%);
-            border-radius: 4px;
-            transition: width 0.5s ease;
-        }
-
-        /* Stats row */
-        .stats-row {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin: 15px 0;
-            flex-wrap: wrap;
-        }
-
-        .stat {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 10px 20px;
-            border-radius: 10px;
-            min-width: 100px;
-        }
-
-        .stat-value {
-            font-size: 1.2rem;
-            font-weight: bold;
-            color: #00d4ff;
-        }
-
-        .stat-label {
-            font-size: 0.7rem;
-            color: #888;
-            text-transform: uppercase;
-        }
-
-        @media (max-width: 480px) {
-            h1 {
-                font-size: 1.8rem;
-            }
-            .amount-display {
-                font-size: 2rem;
-            }
-            .button-group {
-                flex-direction: column;
-            }
-            button {
-                width: 100%;
-            }
+        @media (max-width: 400px) {
+            h1 { font-size: 2.2rem; }
+            .money { font-size: 2.4rem; }
+            body { padding: 24px 16px 40px; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>The Magic Penny</h1>
-        <p class="subtitle">Watch the power of exponential growth</p>
+    <h1>The Magic Penny</h1>
+    <p class="tagline">Double your money every day</p>
 
-        <div class="day-display">
-            Day <span class="day-number" id="days">0</span>
+    <p class="day">Day <strong id="day-num">0</strong></p>
+    <p class="money" id="money">$0.01</p>
+
+    <div class="card">
+        <div class="image-wrap">
+            <img id="img" src="" alt="">
         </div>
-
-        <div class="amount-display" id="amount">$0.01</div>
-
-        <div class="progress-section">
-            <div class="progress-label">
-                <span>Progress to World Domination</span>
-                <span id="progress-percent">0%</span>
-            </div>
-            <div class="progress-bar">
-                <div class="progress-fill" id="progress-fill" style="width: 0%"></div>
-            </div>
-        </div>
-
-        <div class="image-container">
-            <img id="purchase-image" src="" alt="">
-        </div>
-
-        <div class="purchase-text" id="purchase"></div>
-
-        <div class="button-group">
-            <button class="btn-back" id="go-back" onclick="goBackOneDay()" disabled>-1 Day</button>
-            <button class="btn-double" onclick="doubleMoney()">Double Your Money!</button>
-        </div>
-
-        <div class="slider-container">
-            <div class="slider-label">
-                <span>Jump to Day</span>
-                <span id="slider-value">0</span>
-            </div>
-            <input type="range" id="day-slider" min="0" max="55" value="0" oninput="jumpToDay(this.value)">
-        </div>
-
-        <div class="stats-row">
-            <div class="stat">
-                <div class="stat-value" id="multiplier">1x</div>
-                <div class="stat-label">Multiplier</div>
-            </div>
-            <div class="stat">
-                <div class="stat-value" id="clicks">0</div>
-                <div class="stat-label">Clicks</div>
-            </div>
-        </div>
-
-        <div class="achievements">
-            <h3>Achievements</h3>
-            <div class="achievement-grid" id="achievement-grid"></div>
-        </div>
-
-        <div class="button-group">
-            <button class="btn-reset" onclick="resetGame()">Reset</button>
-            <button class="btn-share" onclick="shareProgress()">Share Progress</button>
-        </div>
+        <p class="description" id="desc"></p>
     </div>
+
+    <div class="buttons">
+        <button class="btn-back" id="back-btn" onclick="goBack()" disabled>Back</button>
+        <button class="btn-double" onclick="doubleMoney()">Double it</button>
+    </div>
+
+    <div class="slider-section">
+        <div class="slider-label">
+            <span>Jump to day</span>
+            <span id="slider-val">0</span>
+        </div>
+        <input type="range" id="slider" min="0" max="55" value="0" oninput="jumpTo(this.value)">
+    </div>
+
+    <button class="reset-link" onclick="reset()">Start over</button>
 
     <div class="overlay" id="overlay" onclick="closeMilestone()"></div>
-    <div class="milestone-popup" id="milestone-popup">
-        <h2 id="milestone-title">Milestone!</h2>
-        <p id="milestone-text"></p>
+    <div class="milestone" id="milestone">
+        <h2 id="m-title"></h2>
+        <p id="m-text"></p>
     </div>
 
-    <script>
-        let amount = 0.01;
-        let days = 0;
-        let totalClicks = 0;
-        const maxDays = 55;
+    <!-- Hidden preload container -->
+    <div class="preload" id="preload"></div>
 
-        const achievements = [
-            { id: 'first', name: 'First Step', desc: 'Double once', icon: '1', day: 1 },
-            { id: 'dollar', name: 'Dollar!', desc: 'Reach $1', icon: '2', day: 7 },
-            { id: 'hundred', name: 'Benjamins', desc: 'Reach $100', icon: '3', day: 14 },
-            { id: 'thousand', name: 'Grand', desc: 'Reach $1,000', icon: '4', day: 17 },
-            { id: 'tenk', name: 'Baller', desc: 'Reach $10K', icon: '5', day: 20 },
-            { id: 'million', name: 'Millionaire', desc: 'Reach $1M', icon: '6', day: 27 },
-            { id: 'billion', name: 'Billionaire', desc: 'Reach $1B', icon: '7', day: 37 },
-            { id: 'trillion', name: 'Trillionaire', desc: 'Reach $1T', icon: '8', day: 47 },
-            { id: 'world', name: 'World Owner', desc: 'Buy the world', icon: '9', day: 55 },
+    <script>
+        let day = 0;
+        let money = 0.01;
+        const maxDay = 55;
+        const imageCache = {};
+
+        const items = [
+            'One penny. Watch it grow.',
+            'A paperclip.',
+            'A Dum Dum lollipop.',
+            'A Lego minifigure head.',
+            '1 kilowatt-hour of electricity.',
+            'A packet of Kool-Aid.',
+            'A carpenter\'s pencil.',
+            'An old-fashioned donut.',
+            'A McDonald\'s sundae.',
+            'A deck of playing cards.',
+            'A bag of coffee.',
+            'The Lord of the Rings trilogy (paperback).',
+            'A flight from London to Athens.',
+            'A Japanese chef knife.',
+            'An oil change for a BMW M3.',
+            'Noise-canceling headphones.',
+            'Front-row MLS tickets.',
+            'One month of rent (US average).',
+            'An electric bike.',
+            'A night at the Ritz-Carlton NYC.',
+            'A luxury refrigerator.',
+            'A bottle of ultra-rare wine.',
+            'A Toyota Tundra.',
+            'A private jet flight to NYC.',
+            'A monster truck.',
+            'A house in the Midwest.',
+            'A 10kg gold bar.',
+            'A private Paul McCartney concert.',
+            'A Patek Philippe watch.',
+            '44,784 years of Spotify Premium.',
+            'A small Caribbean island.',
+            '200 years of Michelin dining.',
+            'A mansion.',
+            'A hospital wing (with your name on it).',
+            'A Boeing 737.',
+            'A mega yacht.',
+            '0.1% of Tesla.',
+            'An NHL team.',
+            'An NBA team.',
+            '289 lunches with Warren Buffett.',
+            'Reddit.',
+            'An international airport.',
+            'Twitter.',
+            'Every NBA team.',
+            '10% of US annual revenue.',
+            '$1,000 for every American.',
+            'All US university endowments.',
+            'The entire crypto market.',
+            'The French economy.',
+            'Apple, Microsoft, and Amazon.',
+            'All the gold ever mined.',
+            'The US money supply.',
+            'The entire US stock market.',
+            '750 billion years of Costco membership.',
+            '50 years of global military spending.',
+            'The entire world.'
         ];
 
+        const images = [];
+        for (let i = 0; i <= 55; i++) {
+            if (i === 0) images.push('images/penny_day0.png');
+            else images.push(`images/day${i}.png`);
+        }
+        images.push('images/moneyprinter.gif');
+
         const milestones = {
-            7: { title: 'Dollar Bill!', text: 'You now have over $1!' },
-            14: { title: 'Triple Digits!', text: 'You broke $100!' },
-            27: { title: 'MILLIONAIRE!', text: 'Welcome to the millionaire club!' },
-            37: { title: 'BILLIONAIRE!', text: 'You\'re now a billionaire!' },
-            47: { title: 'TRILLIONAIRE!', text: 'You\'ve reached trillionaire status!' },
-            55: { title: 'WORLD DOMINATION!', text: 'You can now buy the entire world!' },
+            7: ['You have a dollar!', 'It only took a week.'],
+            14: ['$100!', 'Now we\'re getting somewhere.'],
+            20: ['$10,000!', 'That escalated quickly.'],
+            27: ['You\'re a millionaire!', 'Took less than a month.'],
+            37: ['Billionaire!', 'With a B.'],
+            47: ['Trillionaire!', 'This is getting ridiculous.'],
+            55: ['You own the world.', 'Now what?']
         };
 
-        const unlockedAchievements = new Set();
-
-        function formatMoney(number) {
-            if (number >= 1e12) {
-                return '$' + (number / 1e12).toFixed(2) + 'T';
-            } else if (number >= 1e9) {
-                return '$' + (number / 1e9).toFixed(2) + 'B';
-            } else if (number >= 1e6) {
-                return '$' + (number / 1e6).toFixed(2) + 'M';
-            } else if (number >= 1e3) {
-                return '$' + number.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
-            } else {
-                return '$' + number.toFixed(2);
-            }
+        function formatMoney(n) {
+            if (n >= 1e12) return '$' + (n / 1e12).toFixed(1) + ' trillion';
+            if (n >= 1e9) return '$' + (n / 1e9).toFixed(1) + ' billion';
+            if (n >= 1e6) return '$' + (n / 1e6).toFixed(1) + ' million';
+            if (n >= 1000) return '$' + n.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            return '$' + n.toFixed(2);
         }
 
-        function updateDisplay() {
-            const amountEl = document.getElementById('amount');
-            amountEl.textContent = formatMoney(amount);
-            amountEl.classList.add('pulse');
-            setTimeout(() => amountEl.classList.remove('pulse'), 500);
-
-            document.getElementById('days').textContent = days;
-            document.getElementById('slider-value').textContent = days;
-            document.getElementById('day-slider').value = days;
-            document.getElementById('go-back').disabled = days === 0;
-            document.getElementById('multiplier').textContent = Math.pow(2, days).toLocaleString() + 'x';
-            document.getElementById('clicks').textContent = totalClicks;
-
-            const progress = (days / maxDays) * 100;
-            document.getElementById('progress-fill').style.width = progress + '%';
-            document.getElementById('progress-percent').textContent = Math.round(progress) + '%';
-
-            updatePurchase();
-            checkAchievements();
-        }
-
-        function doubleMoney() {
-            if (days < maxDays) {
-                const previousDay = days;
-                amount *= 2;
-                days++;
-                totalClicks++;
-                updateDisplay();
-                checkMilestone(previousDay, days);
-            }
-        }
-
-        function goBackOneDay() {
-            if (days > 0) {
-                amount /= 2;
-                days--;
-                updateDisplay();
-            }
-        }
-
-        function jumpToDay(targetDay) {
-            targetDay = parseInt(targetDay);
-            days = targetDay;
-            amount = 0.01 * Math.pow(2, days);
-            updateDisplay();
-        }
-
-        function resetGame() {
-            days = 0;
-            amount = 0.01;
-            totalClicks = 0;
-            updateDisplay();
-        }
-
-        function checkMilestone(prevDay, newDay) {
-            for (let d = prevDay + 1; d <= newDay; d++) {
-                if (milestones[d]) {
-                    showMilestone(milestones[d].title, milestones[d].text);
-                    break;
+        function preloadImages(startDay, count) {
+            for (let i = startDay; i < Math.min(startDay + count, images.length); i++) {
+                if (!imageCache[i]) {
+                    const img = new Image();
+                    img.src = images[i];
+                    imageCache[i] = img;
                 }
             }
         }
 
+        function update() {
+            const moneyEl = document.getElementById('money');
+            moneyEl.textContent = formatMoney(money);
+            moneyEl.classList.add('pop');
+            setTimeout(() => moneyEl.classList.remove('pop'), 150);
+
+            document.getElementById('day-num').textContent = day;
+            document.getElementById('slider').value = day;
+            document.getElementById('slider-val').textContent = day;
+            document.getElementById('back-btn').disabled = day === 0;
+
+            const img = document.getElementById('img');
+            const src = day < images.length - 1 ? images[day] : images[images.length - 1];
+            img.src = src;
+
+            document.getElementById('desc').textContent = day < items.length ? items[day] : 'Beyond comprehension.';
+
+            // Preload next 5 images
+            preloadImages(day + 1, 5);
+        }
+
+        function doubleMoney() {
+            if (day >= maxDay) return;
+            const prev = day;
+            day++;
+            money = 0.01 * Math.pow(2, day);
+            update();
+            if (milestones[day]) showMilestone(milestones[day][0], milestones[day][1]);
+        }
+
+        function goBack() {
+            if (day === 0) return;
+            day--;
+            money = 0.01 * Math.pow(2, day);
+            update();
+        }
+
+        function jumpTo(d) {
+            day = parseInt(d);
+            money = 0.01 * Math.pow(2, day);
+            update();
+        }
+
+        function reset() {
+            day = 0;
+            money = 0.01;
+            update();
+        }
+
         function showMilestone(title, text) {
-            document.getElementById('milestone-title').textContent = title;
-            document.getElementById('milestone-text').textContent = text;
+            document.getElementById('m-title').textContent = title;
+            document.getElementById('m-text').textContent = text;
             document.getElementById('overlay').classList.add('show');
-            document.getElementById('milestone-popup').classList.add('show');
+            document.getElementById('milestone').classList.add('show');
         }
 
         function closeMilestone() {
             document.getElementById('overlay').classList.remove('show');
-            document.getElementById('milestone-popup').classList.remove('show');
+            document.getElementById('milestone').classList.remove('show');
         }
 
-        function checkAchievements() {
-            achievements.forEach(ach => {
-                if (days >= ach.day && !unlockedAchievements.has(ach.id)) {
-                    unlockedAchievements.add(ach.id);
-                    renderAchievements();
-                }
-            });
-        }
-
-        function renderAchievements() {
-            const grid = document.getElementById('achievement-grid');
-            grid.innerHTML = achievements.map(ach => `
-                <div class="achievement ${unlockedAchievements.has(ach.id) ? 'unlocked' : ''}">
-                    <div class="achievement-icon">${ach.icon}</div>
-                    <div class="achievement-name">${ach.name}</div>
-                    <div class="achievement-desc">${ach.desc}</div>
-                </div>
-            `).join('');
-        }
-
-        function shareProgress() {
-            const text = `I'm on Day ${days} of The Magic Penny challenge with ${formatMoney(amount)}! Can you beat exponential growth?`;
-            if (navigator.share) {
-                navigator.share({ title: 'The Magic Penny', text: text });
-            } else {
-                navigator.clipboard.writeText(text).then(() => {
-                    alert('Progress copied to clipboard!');
-                });
-            }
-        }
-
-        function updatePurchase() {
-            const purchases = [
-                'You have one penny. See how long it takes to amass a fortune if you double your money each day.',
-                'Congratulations! You can now buy a paperclip.',
-                'Upgrade to a delicious Dum Dum sucker from the local candy store.',
-                'Add a Lego mini-figure head to your collection.',
-                'Power up! Purchase 1 kilowatt-hour (kWh) of electricity.',
-                'Quench your thirst with a packet of Cherry Kool-Aid drink mix.',
-                'Stock up on a 4-inch carpenter\'s pencil.',
-                'Treat yourself to an old-fashioned donut.',
-                'Indulge in a small Caramel Sundae from McDonald\'s.',
-                'Play a card game with a new deck of Bicycle playing cards.',
-                'Snag a bag of ground coffee for your morning espresso.',
-                'Embark on a reading adventure with a 3-book paperback set of The Lord of the Rings.',
-                'Fly one-way from London to Athens on Ryan Air.',
-                'Upgrade your kitchen tools with a Japanese Professional Chef Knife.',
-                'Maintain your 2023 BMW M3 sports sedan with an oil change.',
-                'Experience immersive audio with high-quality, noise-canceling headphones.',
-                'Cheer from a front-row seat at an MLS Soccer game.',
-                'Cover one month of rent for a 2-bedroom apartment (US Average).',
-                'Zoom around town with a state-of-the-art electric bike.',
-                'Spend a night in a top-floor luxury suite at the Ritz-Carlton Hotel in New York City.',
-                'Upgrade your kitchen with a built-in luxury refrigerator.',
-                'Savor a bottle of ultra-rare vintage red wine.',
-                'Drive away in a new 2023 Toyota Tundra truck.',
-                'Travel in style on a private jet from Los Angeles to New York City.',
-                'Own a Monster Truck.',
-                'Purchase a single-family home in the Midwest.',
-                'Invest in a 10-kilogram bar of gold.',
-                'Welcome to the two-comma club! Book a private concert with Paul McCartney.',
-                'Adorn your wrist with a one-of-a-kind Patek Philippe gold watch.',
-                'Enjoy 44,784 years of Spotify Premium.',
-                'Own a small private island in the Caribbean.',
-                'Dine at a Michelin-rated restaurant every night for 200 years.',
-                'Live in a large mansion in a prime location.',
-                'Build and name a new hospital wing.',
-                'Acquire a Boeing 737 Private Jet.',
-                'Sail the seas on a 100+ meter mega yacht.',
-                'Own 0.1% of Tesla, Inc ($585 billion valuation 2023).',
-                'Celebrate becoming a billionaire by purchasing an NHL team (Average).',
-                'Acquire an NBA team for roughly double the cost (Average).',
-                'Lunch with Warren Buffet... 289 times ($19m for each meal).',
-                'Buy Reddit ($10 billion valuation in 2021).',
-                'Construct a world-class international airport.',
-                'Acquire Twitter ($44 billion valuation in 2022).',
-                'Purchase every NBA team in the league.',
-                'Cover roughly 10% of the U.S. government\'s annual revenue.',
-                'Give every person in the United States $1,000.',
-                'Match all public and private university endowments in the United States.',
-                'Welcome to the trillionaire club! Buy up the entire crypto market.',
-                'Purchase the entire French economy ($2.8 trillion GDP).',
-                'Acquire Apple, Microsoft, and Amazon.',
-                'Purchase all gold that has been mined ($11.2 trillion).',
-                'Surpass the U.S. M2 Money Supply ($21.1 trillion).',
-                'Buy the entire U.S. Stock Market.',
-                'Secure a Gold Star Executive Costco membership for 750.6 billion years.',
-                'Cover all global military spending for the next 50 years.',
-                'Buy the entire world ($360 trillion global wealth).'
-            ];
-
-            const images = [
-                'images/penny_day0.png',
-                'images/day1.png',
-                'images/day2.png',
-                'images/day3.png',
-                'images/day4.png',
-                'images/day5.png',
-                'images/day6.png',
-                'images/day7.png',
-                'images/day8.png',
-                'images/day9.png',
-                'images/day10.png',
-                'images/day11.png',
-                'images/day12.png',
-                'images/day13.png',
-                'images/day14.png',
-                'images/day15.png',
-                'images/day16.png',
-                'images/day17.png',
-                'images/day18.png',
-                'images/day19.png',
-                'images/day20.png',
-                'images/day21.png',
-                'images/day22.png',
-                'images/day23.png',
-                'images/day24.png',
-                'images/day25.png',
-                'images/day26.png',
-                'images/day27.png',
-                'images/day28.png',
-                'images/day29.png',
-                'images/day30.png',
-                'images/day31.png',
-                'images/day32.png',
-                'images/day33.png',
-                'images/day34.png',
-                'images/day35.png',
-                'images/day36.png',
-                'images/day37.png',
-                'images/day38.png',
-                'images/day39.png',
-                'images/day40.png',
-                'images/day41.png',
-                'images/day42.png',
-                'images/day43.png',
-                'images/day44.png',
-                'images/day45.png',
-                'images/day46.png',
-                'images/day47.png',
-                'images/day48.png',
-                'images/day49.png',
-                'images/day50.png',
-                'images/day51.png',
-                'images/day52.png',
-                'images/day53.png',
-                'images/day54.png',
-                'images/day55.png',
-                'images/moneyprinter.gif',
-            ];
-
-            const img = document.getElementById('purchase-image');
-            img.classList.add('changing');
-
-            setTimeout(() => {
-                if (days < purchases.length) {
-                    document.getElementById('purchase').textContent = purchases[days];
-                    img.src = images[days];
-                } else {
-                    document.getElementById('purchase').textContent = 'Keep going! Your wealth is growing exponentially.';
-                    img.src = 'images/moneyprinter.gif';
-                }
-                img.classList.remove('changing');
-            }, 150);
-        }
+        // Keyboard support
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') doubleMoney();
+            if (e.key === 'ArrowLeft') goBack();
+            if (e.key === 'Escape') closeMilestone();
+        });
 
         // Prevent double-tap zoom on mobile
-        document.addEventListener('touchend', function(event) {
+        let lastTap = 0;
+        document.addEventListener('touchend', (e) => {
             const now = Date.now();
-            if (now - (this.lastTouchEnd || 0) <= 300) {
-                event.preventDefault();
-            }
-            this.lastTouchEnd = now;
-        }, false);
+            if (now - lastTap < 300) e.preventDefault();
+            lastTap = now;
+        }, { passive: false });
 
-        // Initialize
-        window.onload = function() {
-            renderAchievements();
-            updateDisplay();
-        };
+        // Init
+        preloadImages(0, 10);
+        update();
     </script>
 </body>
 </html>
