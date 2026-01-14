@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wilson Combat Product Performance Dashboard - Sample Output</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            background: #1a1a2e;
+            color: #eee;
+            padding: 20px;
+            line-height: 1.4;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .header {
+            background: linear-gradient(135deg, #16213e 0%, #1a1a2e 100%);
+            border: 2px solid #c9a227;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .header h1 {
+            color: #c9a227;
+            margin: 0 0 10px 0;
+            font-size: 1.8em;
+            letter-spacing: 2px;
+        }
+        .header .subtitle {
+            color: #888;
+            font-size: 0.9em;
+        }
+        .logo {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        .report-section {
+            background: #16213e;
+            border: 1px solid #333;
+            border-radius: 6px;
+            margin-bottom: 25px;
+            overflow: hidden;
+        }
+        .section-header {
+            background: #0f3460;
+            color: #c9a227;
+            padding: 12px 20px;
+            font-weight: bold;
+            font-size: 1.1em;
+            border-bottom: 1px solid #333;
+        }
+        .section-content {
+            padding: 15px 20px;
+            overflow-x: auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85em;
+        }
+        th {
+            background: #0f3460;
+            color: #c9a227;
+            padding: 10px 8px;
+            text-align: left;
+            border-bottom: 2px solid #c9a227;
+            white-space: nowrap;
+        }
+        th.right, td.right {
+            text-align: right;
+        }
+        td {
+            padding: 8px;
+            border-bottom: 1px solid #333;
+        }
+        tr:hover {
+            background: #1f4068;
+        }
+        .total-row {
+            background: #0f3460;
+            font-weight: bold;
+        }
+        .total-row td {
+            border-top: 2px solid #c9a227;
+            color: #c9a227;
+        }
+        .positive {
+            color: #4ecca3;
+        }
+        .negative {
+            color: #e94560;
+        }
+        .warning {
+            color: #ffc107;
+        }
+        .metric-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        .metric-card {
+            background: #0f3460;
+            border-radius: 6px;
+            padding: 15px;
+            text-align: center;
+        }
+        .metric-value {
+            font-size: 1.8em;
+            color: #c9a227;
+            font-weight: bold;
+        }
+        .metric-label {
+            color: #888;
+            font-size: 0.85em;
+            margin-top: 5px;
+        }
+        .console-output {
+            background: #0d0d0d;
+            border: 1px solid #333;
+            border-radius: 4px;
+            padding: 15px;
+            font-size: 0.8em;
+            white-space: pre;
+            overflow-x: auto;
+            color: #0f0;
+        }
+        .export-note {
+            background: #1f4068;
+            border-left: 4px solid #4ecca3;
+            padding: 10px 15px;
+            margin-top: 10px;
+            font-size: 0.85em;
+            color: #4ecca3;
+        }
+        .rank {
+            color: #c9a227;
+            font-weight: bold;
+        }
+        .sku {
+            color: #64b5f6;
+        }
+        .category-1911 { color: #ff9800; }
+        .category-ar15 { color: #4caf50; }
+        .category-mag { color: #9c27b0; }
+        .category-parts { color: #00bcd4; }
+        .category-acc { color: #e91e63; }
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+            font-size: 0.8em;
+            border-top: 1px solid #333;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">&#9733;</div>
+        <h1>WILSON COMBAT</h1>
+        <div style="color: #c9a227; font-size: 1.2em; margin-bottom: 5px;">Product Performance Dashboard</div>
+        <div class="subtitle">Report Generated: 01/14/2026 14:32:15</div>
+    </div>
+
+    <!-- Summary Metrics -->
+    <div class="metric-cards">
+        <div class="metric-card">
+            <div class="metric-value">78</div>
+            <div class="metric-label">Active SKUs</div>
+        </div>
+        <div class="metric-card">
+            <div class="metric-value">$2.4M</div>
+            <div class="metric-label">Total Revenue (6 mo)</div>
+        </div>
+        <div class="metric-card">
+            <div class="metric-value">$847K</div>
+            <div class="metric-label">Inventory at Cost</div>
+        </div>
+        <div class="metric-card">
+            <div class="metric-value">42.3%</div>
+            <div class="metric-label">Avg Gross Margin</div>
+        </div>
+    </div>
+
+    <!-- Gross Margin Analysis -->
+    <div class="report-section">
+        <div class="section-header">GROSS MARGIN ANALYSIS BY CATEGORY</div>
+        <div class="section-content">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Category</th>
+                        <th class="right">SKUs</th>
+                        <th class="right">Revenue</th>
+                        <th class="right">Cost</th>
+                        <th class="right">Gross Profit</th>
+                        <th class="right">Margin %</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="category-1911">1911 Pistols</td>
+                        <td class="right">12</td>
+                        <td class="right">$892,465.00</td>
+                        <td class="right">$498,120.00</td>
+                        <td class="right positive">$394,345.00</td>
+                        <td class="right positive">44.18%</td>
+                    </tr>
+                    <tr>
+                        <td class="category-ar15">AR-15 Rifles</td>
+                        <td class="right">11</td>
+                        <td class="right">$524,890.00</td>
+                        <td class="right">$298,450.00</td>
+                        <td class="right positive">$226,440.00</td>
+                        <td class="right positive">43.14%</td>
+                    </tr>
+                    <tr>
+                        <td class="category-mag">Magazines</td>
+                        <td class="right">9</td>
+                        <td class="right">$287,342.50</td>
+                        <td class="right">$142,680.00</td>
+                        <td class="right positive">$144,662.50</td>
+                        <td class="right positive">50.35%</td>
+                    </tr>
+                    <tr>
+                        <td class="category-parts">1911 Parts</td>
+                        <td class="right">24</td>
+                        <td class="right">$345,127.80</td>
+                        <td class="right">$178,960.00</td>
+                        <td class="right positive">$166,167.80</td>
+                        <td class="right positive">48.15%</td>
+                    </tr>
+                    <tr>
+                        <td class="category-parts">AR-15 Parts</td>
+                        <td class="right">12</td>
+                        <td class="right">$198,456.25</td>
+                        <td class="right">$112,340.00</td>
+                        <td class="right positive">$86,116.25</td>
+                        <td class="right positive">43.39%</td>
+                    </tr>
+                    <tr>
+                        <td class="category-acc">Accessories</td>
+                        <td class="right">9</td>
+                        <td class="right">$124,780.45</td>
+                        <td class="right">$68,920.00</td>
+                        <td class="right positive">$55,860.45</td>
+                        <td class="right positive">44.77%</td>
+                    </tr>
+                    <tr>
+                        <td>Shotguns</td>
+                        <td class="right">3</td>
+                        <td class="right">$67,245.00</td>
+                        <td class="right">$38,500.00</td>
+                        <td class="right positive">$28,745.00</td>
+                        <td class="right positive">42.75%</td>
+                    </tr>
+                    <tr>
+                        <td>Apparel</td>
+                        <td class="right">3</td>
+                        <td class="right">$18,942.75</td>
+                        <td class="right">$7,840.00</td>
+                        <td class="right positive">$11,102.75</td>
+                        <td class="right positive">58.62%</td>
+                    </tr>
+                    <tr class="total-row">
+                        <td>TOTAL</td>
+                        <td class="right">78</td>
+                        <td class="right">$2,459,249.75</td>
+                        <td class="right">$1,345,810.00</td>
+                        <td class="right">$1,113,439.75</td>
+                        <td class="right">45.27%</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="export-note">&#10003; Exported to: GrossMarginByCategory.csv</div>
+        </div>
+    </div>
+
+    <!-- Inventory Valuation -->
+    <div class="report-section">
+        <div class="section-header">INVENTORY VALUATION & WEEKS OF SUPPLY</div>
+        <div class="section-content">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Category</th>
+                        <th class="right">SKUs</th>
+                        <th class="right">Units</th>
+                        <th class="right">Inv @ Cost</th>
+                        <th class="right">Inv @ Retail</th>
+                        <th class="right">Committed</th>
+                        <th class="right">Available</th>
+                        <th class="right">Wks Supply</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="category-mag">Magazines</td>
+                        <td class="right">9</td>
+                        <td class="right">4,892</td>
+                        <td class="right">$78,420</td>
+                        <td class="right">$178,560</td>
+                        <td class="right">1,245</td>
+                        <td class="right">3,647</td>
+                        <td class="right">14.2</td>
+                    </tr>
+                    <tr>
+                        <td class="category-parts">1911 Parts</td>
+                        <td class="right">24</td>
+                        <td class="right">8,456</td>
+                        <td class="right">$298,450</td>
+                        <td class="right">$634,200</td>
+                        <td class="right">2,180</td>
+                        <td class="right">6,276</td>
+                        <td class="right">22.4</td>
+                    </tr>
+                    <tr>
+                        <td class="category-parts">AR-15 Parts</td>
+                        <td class="right">12</td>
+                        <td class="right">2,134</td>
+                        <td class="right">$187,620</td>
+                        <td class="right">$342,890</td>
+                        <td class="right">645</td>
+                        <td class="right">1,489</td>
+                        <td class="right">24.6</td>
+                    </tr>
+                    <tr>
+                        <td class="category-1911">1911 Pistols</td>
+                        <td class="right">12</td>
+                        <td class="right">186</td>
+                        <td class="right">$142,560</td>
+                        <td class="right">$254,430</td>
+                        <td class="right">78</td>
+                        <td class="right">108</td>
+                        <td class="right">4.2</td>
+                    </tr>
+                    <tr>
+                        <td class="category-ar15">AR-15 Rifles</td>
+                        <td class="right">11</td>
+                        <td class="right">312</td>
+                        <td class="right">$98,760</td>
+                        <td class="right">$178,450</td>
+                        <td class="right">124</td>
+                        <td class="right">188</td>
+                        <td class="right">4.8</td>
+                    </tr>
+                    <tr>
+                        <td class="category-acc">Accessories</td>
+                        <td class="right">9</td>
+                        <td class="right">1,245</td>
+                        <td class="right">$32,890</td>
+                        <td class="right">$68,420</td>
+                        <td class="right">312</td>
+                        <td class="right">933</td>
+                        <td class="right">6.8</td>
+                    </tr>
+                    <tr>
+                        <td>Shotguns</td>
+                        <td class="right">3</td>
+                        <td class="right">42</td>
+                        <td class="right">$24,680</td>
+                        <td class="right">$44,100</td>
+                        <td class="right">18</td>
+                        <td class="right">24</td>
+                        <td class="right">8.4</td>
+                    </tr>
+                    <tr>
+                        <td>Apparel</td>
+                        <td class="right">3</td>
+                        <td class="right">524</td>
+                        <td class="right">$5,240</td>
+                        <td class="right">$13,100</td>
+                        <td class="right">86</td>
+                        <td class="right">438</td>
+                        <td class="right">7.2</td>
+                    </tr>
+                    <tr class="total-row">
+                        <td colspan="3">TOTAL INVENTORY:</td>
+                        <td class="right">$868,620</td>
+                        <td class="right">$1,714,150</td>
+                        <td class="right">4,688</td>
+                        <td class="right">13,103</td>
+                        <td class="right">-</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="export-note">&#10003; Exported to: InventoryValuation.csv</div>
+        </div>
+    </div>
+
+    <!-- Top 10 SKUs -->
+    <div class="report-section">
+        <div class="section-header">TOP 10 SKUS BY REVENUE</div>
+        <div class="section-content">
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>SKU</th>
+                        <th>Description</th>
+                        <th class="right">Units</th>
+                        <th class="right">Revenue</th>
+                        <th class="right">Profit</th>
+                        <th class="right">Margin</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="rank">1</td>
+                        <td class="sku">CQB-FS-45</td>
+                        <td>CQB Full-Size .45 ACP 5in Barrel</td>
+                        <td class="right">87</td>
+                        <td class="right">$286,665.00</td>
+                        <td class="right positive">$125,715.00</td>
+                        <td class="right positive">43.9%</td>
+                    </tr>
+                    <tr>
+                        <td class="rank">2</td>
+                        <td class="sku">EDC-X9-9MM</td>
+                        <td>EDC X9 9mm Double Stack 15+1</td>
+                        <td class="right">74</td>
+                        <td class="right">$214,230.00</td>
+                        <td class="right positive">$92,130.00</td>
+                        <td class="right positive">43.0%</td>
+                    </tr>
+                    <tr>
+                        <td class="rank">3</td>
+                        <td class="sku">AR15-RECON-556</td>
+                        <td>Recon Tactical 5.56 NATO 16in</td>
+                        <td class="right">62</td>
+                        <td class="right">$160,890.00</td>
+                        <td class="right positive">$71,090.00</td>
+                        <td class="right positive">44.2%</td>
+                    </tr>
+                    <tr>
+                        <td class="rank">4</td>
+                        <td class="sku">TSG-FS-45</td>
+                        <td>Tactical Supergrade Full-Size .45</td>
+                        <td class="right">34</td>
+                        <td class="right">$146,030.00</td>
+                        <td class="right positive">$62,730.00</td>
+                        <td class="right positive">42.9%</td>
+                    </tr>
+                    <tr>
+                        <td class="rank">5</td>
+                        <td class="sku">MAG-AR15-556-30</td>
+                        <td>WC Logo AR-15 Magazine 5.56 30rd</td>
+                        <td class="right">1,842</td>
+                        <td class="right">$45,958.90</td>
+                        <td class="right positive">$25,696.90</td>
+                        <td class="right positive">55.9%</td>
+                    </tr>
+                    <tr>
+                        <td class="rank">6</td>
+                        <td class="sku">CQB-ELITE-45</td>
+                        <td>CQB Elite Full-Size .45 Armor-Tuff</td>
+                        <td class="right">28</td>
+                        <td class="right">$103,460.00</td>
+                        <td class="right positive">$44,660.00</td>
+                        <td class="right positive">43.2%</td>
+                    </tr>
+                    <tr>
+                        <td class="rank">7</td>
+                        <td class="sku">AR15-UPPER-556-16</td>
+                        <td>Complete Upper 5.56 16in Mid-Length</td>
+                        <td class="right">78</td>
+                        <td class="right">$93,210.00</td>
+                        <td class="right positive">$42,510.00</td>
+                        <td class="right positive">45.6%</td>
+                    </tr>
+                    <tr>
+                        <td class="rank">8</td>
+                        <td class="sku">BCG-AR15-NP3</td>
+                        <td>Bolt Carrier Group NP3 Coated</td>
+                        <td class="right">245</td>
+                        <td class="right">$73,487.75</td>
+                        <td class="right positive">$33,062.75</td>
+                        <td class="right positive">45.0%</td>
+                    </tr>
+                    <tr>
+                        <td class="rank">9</td>
+                        <td class="sku">MAG-1911-45-8</td>
+                        <td>Elite Tactical Magazine .45 ACP 8rd</td>
+                        <td class="right">1,456</td>
+                        <td class="right">$62,548.20</td>
+                        <td class="right positive">$35,612.20</td>
+                        <td class="right positive">56.9%</td>
+                    </tr>
+                    <tr>
+                        <td class="rank">10</td>
+                        <td class="sku">CE-PRO-45</td>
+                        <td>Combat Elite Professional .45 ACP</td>
+                        <td class="right">24</td>
+                        <td class="right">$83,880.00</td>
+                        <td class="right positive">$37,080.00</td>
+                        <td class="right positive">44.2%</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="export-note">&#10003; Exported to: TopSkusByRevenue.csv (full list of 78 SKUs)</div>
+        </div>
+    </div>
+
+    <!-- Dead Stock Report -->
+    <div class="report-section">
+        <div class="section-header">DEAD STOCK REPORT (NO SALES IN 90+ DAYS)</div>
+        <div class="section-content">
+            <table>
+                <thead>
+                    <tr>
+                        <th>SKU</th>
+                        <th>Description</th>
+                        <th class="right">On Hand</th>
+                        <th class="right">Inv Value</th>
+                        <th class="right">Days Silent</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="sku">GRP-1911-ELK</td>
+                        <td>Elk Horn Grips Hand Finished Full-Size</td>
+                        <td class="right warning">124</td>
+                        <td class="right warning">$15,500.00</td>
+                        <td class="right negative">142</td>
+                    </tr>
+                    <tr>
+                        <td class="sku">AR15-UPPER-224-20</td>
+                        <td>Complete Upper .224 Valkyrie 20in</td>
+                        <td class="right warning">18</td>
+                        <td class="right warning">$13,950.00</td>
+                        <td class="right negative">118</td>
+                    </tr>
+                    <tr>
+                        <td class="sku">SG-STD-12</td>
+                        <td>Standard Model 12ga 20in Improved</td>
+                        <td class="right warning">8</td>
+                        <td class="right warning">$11,600.00</td>
+                        <td class="right negative">104</td>
+                    </tr>
+                    <tr>
+                        <td class="sku">STOCK-AR15-SOP</td>
+                        <td>SOPMOD Stock Mil-Spec</td>
+                        <td class="right warning">86</td>
+                        <td class="right warning">$5,848.00</td>
+                        <td class="right negative">96</td>
+                    </tr>
+                    <tr>
+                        <td class="sku">CASE-AR15-TAN</td>
+                        <td>Wilson Combat Soft Rifle Case 42in Tan</td>
+                        <td class="right warning">42</td>
+                        <td class="right warning">$3,570.00</td>
+                        <td class="right negative">91</td>
+                    </tr>
+                    <tr class="total-row">
+                        <td colspan="2">Dead Stock Items: 5</td>
+                        <td class="right">278</td>
+                        <td class="right">$50,468.00</td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="export-note">&#10003; Exported to: DeadStockReport.csv</div>
+        </div>
+    </div>
+
+    <!-- Backorder Exposure -->
+    <div class="report-section">
+        <div class="section-header">BACKORDER EXPOSURE REPORT (COMMITTED > ON HAND)</div>
+        <div class="section-content">
+            <table>
+                <thead>
+                    <tr>
+                        <th>SKU</th>
+                        <th>Warehouse</th>
+                        <th class="right">On Hand</th>
+                        <th class="right">Committed</th>
+                        <th class="right">B/O Qty</th>
+                        <th class="right">Rev at Risk</th>
+                        <th class="right">Reorder Pt</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="sku">CQB-FS-45</td>
+                        <td>DALLAS-TX</td>
+                        <td class="right">4</td>
+                        <td class="right negative">12</td>
+                        <td class="right negative">8</td>
+                        <td class="right negative">$26,360.00</td>
+                        <td class="right">5</td>
+                    </tr>
+                    <tr>
+                        <td class="sku">EDC-X9-9MM</td>
+                        <td>CHARLOTTE-NC</td>
+                        <td class="right">2</td>
+                        <td class="right negative">7</td>
+                        <td class="right negative">5</td>
+                        <td class="right negative">$14,475.00</td>
+                        <td class="right">5</td>
+                    </tr>
+                    <tr>
+                        <td class="sku">MAG-AR15-556-30</td>
+                        <td>DALLAS-TX</td>
+                        <td class="right">45</td>
+                        <td class="right negative">68</td>
+                        <td class="right negative">23</td>
+                        <td class="right negative">$573.85</td>
+                        <td class="right">150</td>
+                    </tr>
+                    <tr>
+                        <td class="sku">BCG-AR15-NP3</td>
+                        <td>BERRYVILLE-AR</td>
+                        <td class="right">18</td>
+                        <td class="right negative">24</td>
+                        <td class="right negative">6</td>
+                        <td class="right negative">$1,799.70</td>
+                        <td class="right">20</td>
+                    </tr>
+                    <tr>
+                        <td class="sku">TRG-1911-ULT</td>
+                        <td>CHARLOTTE-NC</td>
+                        <td class="right">12</td>
+                        <td class="right negative">18</td>
+                        <td class="right negative">6</td>
+                        <td class="right negative">$539.70</td>
+                        <td class="right">30</td>
+                    </tr>
+                    <tr>
+                        <td class="sku">AR15-UPPER-556-16</td>
+                        <td>DALLAS-TX</td>
+                        <td class="right">6</td>
+                        <td class="right negative">9</td>
+                        <td class="right negative">3</td>
+                        <td class="right negative">$3,585.00</td>
+                        <td class="right">15</td>
+                    </tr>
+                    <tr>
+                        <td class="sku">MAG-1911-45-8</td>
+                        <td>BERRYVILLE-AR</td>
+                        <td class="right">82</td>
+                        <td class="right negative">95</td>
+                        <td class="right negative">13</td>
+                        <td class="right negative">$558.35</td>
+                        <td class="right">75</td>
+                    </tr>
+                    <tr class="total-row">
+                        <td colspan="4">Total Backorder Units: 64</td>
+                        <td></td>
+                        <td class="right">$47,891.60</td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="export-note">&#10003; Exported to: BackorderExposure.csv</div>
+        </div>
+    </div>
+
+    <!-- Console Output Sample -->
+    <div class="report-section">
+        <div class="section-header">FOXPRO CONSOLE OUTPUT (SAMPLE)</div>
+        <div class="section-content">
+            <div class="console-output">Creating database tables...
+  Tables created successfully.
+
+Populating PRODUCTS table...
+  Products table populated with 78 items.
+
+Populating INVENTORY table...
+  Inventory records created: 234
+
+Populating ORDERS table...
+  Orders created: 850
+
+Populating ORDERLINE table...
+  Order lines created: 1,847
+
+==========================================
+WILSON COMBAT PERFORMANCE DASHBOARD
+Report Generated: 01/14/2026 14:32:15
+==========================================
+
+GROSS MARGIN ANALYSIS BY CATEGORY
+---------------------------------------------------------------------------
+Category             SKUs       Revenue          Cost        Profit   Margin%
+---------------------------------------------------------------------------
+1911 Pistols           12   $892,465.00   $498,120.00  $394,345.00    44.18%
+AR-15 Rifles           11   $524,890.00   $298,450.00  $226,440.00    43.14%
+Magazines               9   $287,342.50   $142,680.00  $144,662.50    50.35%
+...
+
+  Exported to: GrossMarginByCategory.csv
+
+==========================================
+All reports exported to CSV files.
+==========================================</div>
+        </div>
+    </div>
+
+    <footer>
+        <p>Wilson Combat Product Performance Dashboard - Visual FoxPro Demo</p>
+        <p>Data shown is simulated for demonstration purposes</p>
+    </footer>
+</body>
+</html>
